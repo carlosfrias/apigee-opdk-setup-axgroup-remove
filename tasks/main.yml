@@ -16,4 +16,5 @@
     method: DELETE
     body_format: json
     url: http://{{ local_mgmt_ip }}:8080/v1/analytics/groups/ax/{{ ax_group }}
+  delegate_to: "{{ local_mgmt_ip | default(ansible_default_ipv4.address) }}"
 
