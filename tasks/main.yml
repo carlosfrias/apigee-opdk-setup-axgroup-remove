@@ -10,7 +10,7 @@
     msg: "Please provide the missing attribute"
 
 - block:
-  - name: Add qpid server
+  - name: Remove axgroup
     uri:
       user: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
@@ -20,12 +20,12 @@
 
   rescue:
 
-  - name: Add qpid server
+  - name: Recover attempted removal of axgroup
     uri:
       user: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
       method: DELETE
       body_format: json
-      url: http://{{ local_mgmt_ip }}:8080/v1/analytics/groups/ax/{{ ax_group }}
+      url: http://127.0.0.1:8080/v1/analytics/groups/ax/{{ ax_group }}
     delegate_to: "{{ local_mgmt_ip | default(ansible_default_ipv4.address) }}"
 
